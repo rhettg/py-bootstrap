@@ -2,6 +2,8 @@
 
 GITIGNORES=$(shell cat .gitignore |tr "\\n" ",")
 
+PYTHON=python
+
 all: pep8
 
 pep8: .gitignore env
@@ -13,7 +15,7 @@ pyflakes: env
 dev: env env/.pip
 
 env:
-	virtualenv --distribute env
+	virtualenv -p $(PYTHON) --distribute env
 
 env/.pip: env cfg/requirements.txt
 	bin/virtual-env-exec pip install -r cfg/requirements.txt
